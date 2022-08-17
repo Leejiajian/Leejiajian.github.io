@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="学习网络编程的一些记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="network">
+<meta property="og:url" content="http://example.com/2022/08/06/network/index.html">
+<meta property="og:site_name" content="Lee&#39;s Blog">
+<meta property="og:description" content="学习网络编程的一些记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-06T12:56:10.000Z">
+<meta property="article:modified_time" content="2022-08-17T07:53:58.582Z">
+<meta property="article:author" content="LeeJiajian">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/08/06/network/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>network | Lee's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lee's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/06/network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LeeJiajian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          network
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-06 20:56:10" itemprop="dateCreated datePublished" datetime="2022-08-06T20:56:10+08:00">2022-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-08-17 15:53:58" itemprop="dateModified" datetime="2022-08-17T15:53:58+08:00">2022-08-17</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>学习网络编程的一些记录</p>
+<span id="more"></span>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h3 id="ARP协议-和-RARP协议"><a href="#ARP协议-和-RARP协议" class="headerlink" title="ARP协议 和 RARP协议"></a>ARP协议 和 RARP协议</h3><p>网络层使用IP地址寻址一台设备，而数据链路层使用MAC地址寻址一台设备，所以网络层需要实现了IP地址和MAC地址的相互转换。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p>实现数据包的选路和转发</p>
+<h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>根据数据包的目的IP来决定如何投递它</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><p>超时重发、数据确认</p>
+<h3 id="DNS域名解析"><a href="#DNS域名解析" class="headerlink" title="DNS域名解析"></a>DNS域名解析</h3><p>通过域名寻找IP地址</p>
+<h3 id="TIME-WAIT-状态"><a href="#TIME-WAIT-状态" class="headerlink" title="TIME_WAIT 状态"></a>TIME_WAIT 状态</h3><ul>
+<li>可靠地终止TCP连接</li>
+<li>保证迟来的TCP报文有足够的时间被识别并丢弃</li>
+</ul>
+<h3 id="复位报文段"><a href="#复位报文段" class="headerlink" title="复位报文段"></a>复位报文段</h3><p>下面是几种会发送复位报文段的场景</p>
+<ul>
+<li>访问不存在的端口</li>
+<li>异常终止连接<br>发送给对方一个复位报文段，发送端所有排队等待发送的数据都将被丢弃</li>
+<li>处理半打开状态：<br>当往半打开状态的连接中写入数据，则对方会回应一个复位报文段</li>
+</ul>
+<h3 id="tcp-拥塞控制"><a href="#tcp-拥塞控制" class="headerlink" title="tcp 拥塞控制"></a>tcp 拥塞控制</h3><ol>
+<li>慢启动</li>
+<li>拥塞避免</li>
+<li>快速重传</li>
+<li>快速恢复</li>
+</ol>
+<p>拥塞控制控制的是发送端向网络一次连续写入(收到其中第一个数据的确认之前)的数据量，称为SWND(发送窗口)。</p>
+<h2 id="chapter-5"><a href="#chapter-5" class="headerlink" title="chapter 5"></a>chapter 5</h2><h3 id="主机字节序和网络字节序"><a href="#主机字节序和网络字节序" class="headerlink" title="主机字节序和网络字节序"></a>主机字节序和网络字节序</h3><p>大端字节序：高位字节存储在内存的低地址处，低位存储在内存的高地址处。</p>
+<p>小端字节序：高位字节存储在内存的高地址处，低位存储在内存的低地址处。</p>
+<p><strong>主机字节序</strong>：小端字节序</p>
+<p><strong>网络字节序</strong>：大端字节序</p>
+<p>java 虚拟机采用大端字节序</p>
+<h3 id="Linux-字节序转换的函数"><a href="#Linux-字节序转换的函数" class="headerlink" title="Linux 字节序转换的函数"></a>Linux 字节序转换的函数</h3><pre><code>#include&lt;netinet/in.h&gt;
+unsigned long int htonl(unsigned long int hostlong);
+unsigned short int htons(unsigned short int hostshort);
+unsigned long int ntohl(unsigned long int netlong);
+unsigned short int ntohs(unsigned short int netshort);
+</code></pre>
+<p>htonl 表示 “host to network long”</p>
+<p>长整型通常用来转换IP地址，短整型用来转换端口号。</p>
+<h3 id="通用-socket-地址"><a href="#通用-socket-地址" class="headerlink" title="通用 socket 地址"></a>通用 socket 地址</h3><p>socket网络接口中表示socket地址的是结构体sockaddr,其定义如下：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><pre><code>#include&lt;bits/socket.h&gt;
+struct sockaddr &#123;
+    sa_family_t sa_family;
+    char sa_data[14];
+&#125;;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>协议族</th>
+<th>地址族</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PF_UNIX</td>
+<td>AF_UNIX</td>
+<td>UNIX本地域协议族</td>
+</tr>
+<tr>
+<td>PF_INET</td>
+<td>AF_INET</td>
+<td>TCP/IPv4协议族</td>
+</tr>
+<tr>
+<td>PF_INET6</td>
+<td>AF_INET6</td>
+<td>TCP/IPv6议族</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>协议族</th>
+<th>地址值含义和长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PF_UNIX</td>
+<td>文件的路径名，长度可达108字节</td>
+</tr>
+<tr>
+<td>PF_INET</td>
+<td>16bit的端口号和32bit IPv4地址，共6字节</td>
+</tr>
+<tr>
+<td>PF_INET6</td>
+<td>16bit端口号，32bit流标识，128bit IPv6地址，32bit范围ID,共26字节</td>
+</tr>
+</tbody></table>
+<h3 id="UNIX-本地域协议族"><a href="#UNIX-本地域协议族" class="headerlink" title="UNIX 本地域协议族"></a>UNIX 本地域协议族</h3><pre><code>#include&lt;sys/un.h&gt;
+struct sockaddr_un&#123;
+    sa_family_t sin_family; // 地址族
+    char sun_path[108];  // 文件路径名
+&#125;; 
+</code></pre>
+<h3 id="TCP-IP-协议族"><a href="#TCP-IP-协议族" class="headerlink" title="TCP/IP 协议族"></a>TCP/IP 协议族</h3><pre><code>// IPv4 地址
+struct sockaddr_in
+&#123;
+    sa_family_t sin_family;/*地址族AF_INET*/
+    u_int16_t sin_port;/*端口号，要用网络字节序表示*/
+    struct in_addr sin_addr;/*IPv4地址结构体，见下面*/
+&#125;;
+struct in_addr
+&#123;
+    u_int32_t s_addr;/*IPv4地址，要用网络字节序表示*/
+&#125;;
+
+//IPv6地址表示
+struct sockaddr_in6
+&#123;
+    sa_family_t sin6_family;/*地址族：AF_INET6*/
+    u_int16_t sin6_port;/*端口号，要用网络字节序表示*/
+    u_int32_t sin6_flowinfo;/*流信息，应设置为0*/
+    struct in6_addr sin6_addr;/*IPv6地址结构体，见下面*/
+    u_int32_t sin6_scope_id;/*scope ID，尚处于实验阶段*/
+&#125;;
+struct in6_addr
+&#123;
+    unsigned char sa_addr[16];/*IPv6地址，要用网络字节序表示*/
+&#125;;
+</code></pre>
+<p>所有专用的socket地址类型的变量在使用过程中都需要转化为sockaddr(强制类型转换即可)。</p>
+<h3 id="IP地址转换函数"><a href="#IP地址转换函数" class="headerlink" title="IP地址转换函数"></a>IP地址转换函数</h3><pre><code>#include＜arpa/inet.h＞
+// 将用点分十进制字符串表示的IPv4地址转化为用网络字节序整数表示的IPv4地址
+in_addr_t inet_addr(const char*strptr);
+int inet_aton(const char*cp,struct in_addr*inp);
+// 将用网络字节序整数表示的IPv4地址转化为用点分十进制字符串表示的IPv4地址
+char*inet_ntoa(struct in_addr in);
+</code></pre>
+<p>下面的函数也能完成和前面的三个函数同样的功能，并且同时适用于IPv4和IPv6</p>
+<pre><code>#include&lt;arpa/inet.h&gt;
+int inet_pton(int af,const char*src,void*dst);
+const char*inet_ntop(int af,const void*src,char*dst,socklen_t cnt);
+</code></pre>
+<p>将用字符串表示的IP地址src（用点分十进制字符串表示的IPv4地址或用十六进制字符串表示的IPv6地址）转换成用网络字节序整数表示的IP地址，并把转换结果存储于dst指向的内存中.</p>
+<p>af : 指定地址族，可以是AF_INET 或 AF_INET6</p>
+<p>inet_ntop函数与inet_pton函数进行相反的操作，最后的参数指定目标存储单元的大小。可通过下面的宏指定大小：</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><pre><code>#include＜netinet/in.h＞
+#define INET_ADDRSTRLEN 16
+#define INET6_ADDRSTRLEN 46 
+</code></pre>
+<h1 id="-2"><a href="#-2" class="headerlink" title=""></a></h1><p>inet_ntop成功时返回目标存储单元的地址，失败则返回NULL并设置errno。</p>
+<h3 id="创建-socket"><a href="#创建-socket" class="headerlink" title="创建 socket"></a>创建 socket</h3><pre><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/socket.h&gt;
+int socket(int domain, int type, int protocol);
+</code></pre>
+<p>domain: 明确使用哪个底层协议族。对于TCP/IP协议族，使用PF_INET或者PF_INET6。</p>
+<p>type: 指定服务类型。主要有SOCK_STREAM(流服务)和SOCK_UGRAM(数据包服务)；SOCK_NONBLOCK:将新创建的socket设置为非阻塞的；SOCK_CLOEXEC:用fork调用创建子进程时在子进程中关闭该socket.</p>
+<p>protocol: 设置为0，表示使用默认协议.</p>
+<p>返回值：调用成功返回一个socket文件描述符，失败则返回-1并设置errno.</p>
+<h3 id="命名-socket"><a href="#命名-socket" class="headerlink" title="命名 socket"></a>命名 socket</h3><ul>
+<li>创建socket时，指定了地址族，但未指定使用该地址族的哪个具体socket地址。将socket与socket地址绑定称为命名socket。</li>
+</ul>
+<h1 id="-3"><a href="#-3" class="headerlink" title=""></a></h1><pre><code>#include＜sys/types.h＞
+#include＜sys/socket.h＞
+int bind(int sockfd,const struct sockaddr*my_addr,socklen_t addrlen);
+</code></pre>
+<p>sockfd: socket文件描述符</p>
+<p>my_addr: socket地址</p>
+<p>addlen: 该socket地址的长度</p>
+<p>返回值：成功时返回0， 失败返回1，并设置errno。</p>
+<h3 id="创建监听socket"><a href="#创建监听socket" class="headerlink" title="创建监听socket"></a>创建监听socket</h3><ul>
+<li>创建监听队列存放待处理的客户连接</li>
+</ul>
+<h1 id="-4"><a href="#-4" class="headerlink" title=""></a></h1><pre><code>#include&lt;sys/socket.h&gt;
+int listen(int sockfd, int backlog);
+</code></pre>
+<h1 id="-5"><a href="#-5" class="headerlink" title=""></a></h1><p>backlog: 内核监听队列的最大长度</p>
+<p>返回值：成功时返回0，失败时返回-1并设置errno.</p>
+<h3 id="接收连接"><a href="#接收连接" class="headerlink" title="接收连接"></a>接收连接</h3><pre><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/socket.h&gt;
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+</code></pre>
+<p>sockfd: 执行过listen系统调用的监听socket。</p>
+<p>addr:用来获取被接受连接的远端socket地址</p>
+<p>addrlen:该socket地址的长度</p>
+<p>返回值：成功时返回一个新的连接socket, 该socket唯一标识了被接受的这个连接，服务器可通过读写该socket来与被接受连接对应的客户端通信。失败时返回-1,并设置errno.</p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><pre><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/socket.h&gt;
+int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen);
+</code></pre>
+<p>serv_addr: 服务器监听的socket地址</p>
+<p>addrlen: 该地址的长度</p>
+<p>返回值：成功时返回0， 失败时返回-1并设置errno</p>
+<h1 id="-6"><a href="#-6" class="headerlink" title=""></a></h1><pre><code>#include&lt;unistd.h&gt;
+int close(int fd);
+</code></pre>
+<h1 id="-7"><a href="#-7" class="headerlink" title=""></a></h1><p>fd是待关闭的socket。close将fd的引用计数减一，引用计数等于0时，关闭连接。</p>
+<h1 id="-8"><a href="#-8" class="headerlink" title=""></a></h1><pre><code>#include&lt;sys/socket.h&gt;
+int shutdown(int sockfd, int howto);
+</code></pre>
+<p>howto 决定shutdown的行为。</p>
+<p>SHUT_RD:关闭socket上读的这一半。不能再对socket文件描述符执行读操作，并且该socket接收缓冲区中的数据都被丢弃。</p>
+<p>SHUT_WR:关闭socket上写的这一半。sockfd的发送缓冲区数据会在真正关闭连接之前全部发送出去，不可再对该socket文件描述符执行写操作。</p>
+<p>SHUT_RDWR: 同时关闭sockfd上的读和写。</p>
+<h3 id="数据读写"><a href="#数据读写" class="headerlink" title="数据读写"></a>数据读写</h3><h4 id="TCP-数据读写"><a href="#TCP-数据读写" class="headerlink" title="TCP 数据读写"></a>TCP 数据读写</h4><pre><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/socket.h&gt;
+ssize_t recv(int sockfd, void *buf, size_t len, int flags);
+ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+</code></pre>
+<p>recv: flags通常设置为0</p>
+<p>都返回实际写入的长度</p>
+<h4 id="UDP-数据读写"><a href="#UDP-数据读写" class="headerlink" title="UDP 数据读写"></a>UDP 数据读写</h4><pre><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/socket.h&gt;
+ssize_t recvfrom(int sockfd,void*buf,size_t len,int flags,struct sockaddr *src_addr,socklen_t *addrlen);
+ssize_t sendto(int sockfd,const void*buf,size_t len,int flags,const struct sockaddr *dest_addr,socklen_t addrlen);
+</code></pre>
+<h4 id="通用数据读写函数"><a href="#通用数据读写函数" class="headerlink" title="通用数据读写函数"></a>通用数据读写函数</h4><pre><code>#include&lt;sys/socket.h&gt;
+ssize_t recvmsg(int sockfd,struct msghdr*msg,int flags);
+ssize_t sendmsg(int sockfd,struct msghdr*msg,int flags);
+
+
+struct msghdr
+&#123;
+    void* msg_name;/*通信对方socket地址*/
+    socklen_t msg_namelen;/*socket地址的长度*/
+    struct iovec* msg_iov;/*分散的内存块，见后文*/
+    int msg_iovlen;/*分散内存块的数量*/
+    void* msg_control;/*指向辅助数据的起始位置*/
+    socklen_t msg_controllen;/*辅助数据的大小*/
+    int msg_flags;/*复制函数中的flags参数，并在调用过程中更新*/
+&#125;;
+
+
+struct iovec &#123;
+    void *iov_base; // 内存起始地址
+    size_t iov_len; // 这块内存的长度
+&#125;;
+</code></pre>
+<h3 id="带外标记"><a href="#带外标记" class="headerlink" title="带外标记"></a>带外标记</h3><pre><code>#include&lt;sys/socket.h&gt;
+int sockatmark(int sockfd);
+</code></pre>
+<p>判断sockfd是否处于带外标记，即下一个被读取到的数据是否是带外数据。</p>
+<h3 id="地址信息函数"><a href="#地址信息函数" class="headerlink" title="地址信息函数"></a>地址信息函数</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/04/linux/" rel="prev" title="linux">
+      <i class="fa fa-chevron-left"></i> linux
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE-%E5%92%8C-RARP%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.</span> <span class="nav-text">ARP协议 和 RARP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.</span> <span class="nav-text">IP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.1.</span> <span class="nav-text">TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="nav-number">3.2.</span> <span class="nav-text">DNS域名解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TIME-WAIT-%E7%8A%B6%E6%80%81"><span class="nav-number">3.3.</span> <span class="nav-text">TIME_WAIT 状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E4%BD%8D%E6%8A%A5%E6%96%87%E6%AE%B5"><span class="nav-number">3.4.</span> <span class="nav-text">复位报文段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">3.5.</span> <span class="nav-text">tcp 拥塞控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chapter-5"><span class="nav-number">4.</span> <span class="nav-text">chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E5%AD%97%E8%8A%82%E5%BA%8F%E5%92%8C%E7%BD%91%E7%BB%9C%E5%AD%97%E8%8A%82%E5%BA%8F"><span class="nav-number">4.1.</span> <span class="nav-text">主机字节序和网络字节序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-%E5%AD%97%E8%8A%82%E5%BA%8F%E8%BD%AC%E6%8D%A2%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.</span> <span class="nav-text">Linux 字节序转换的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8-socket-%E5%9C%B0%E5%9D%80"><span class="nav-number">4.3.</span> <span class="nav-text">通用 socket 地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIX-%E6%9C%AC%E5%9C%B0%E5%9F%9F%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">5.1.</span> <span class="nav-text">UNIX 本地域协议族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">5.2.</span> <span class="nav-text">TCP&#x2F;IP 协议族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">IP地址转换函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number"></span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-2"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-socket"><span class="nav-number">0.1.</span> <span class="nav-text">创建 socket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D-socket"><span class="nav-number">0.2.</span> <span class="nav-text">命名 socket</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-3"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%91%E5%90%ACsocket"><span class="nav-number">0.1.</span> <span class="nav-text">创建监听socket</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-4"><span class="nav-number"></span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-5"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">0.1.</span> <span class="nav-text">接收连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">1.</span> <span class="nav-text">服务端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-6"><span class="nav-number"></span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-7"><span class="nav-number"></span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-8"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99"><span class="nav-number">0.1.</span> <span class="nav-text">数据读写</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99"><span class="nav-number">0.1.1.</span> <span class="nav-text">TCP 数据读写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP-%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99"><span class="nav-number">0.1.2.</span> <span class="nav-text">UDP 数据读写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0"><span class="nav-number">0.1.3.</span> <span class="nav-text">通用数据读写函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E5%A4%96%E6%A0%87%E8%AE%B0"><span class="nav-number">0.2.</span> <span class="nav-text">带外标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0"><span class="nav-number">0.3.</span> <span class="nav-text">地址信息函数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">LeeJiajian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LeeJiajian</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
